@@ -9,7 +9,9 @@ import { Passenger } from '../../models/passenger.interface';
       <passenger-count
         [items]="passengers">
       </passenger-count>
-      <passenger-detail>
+      <passenger-detail
+        *ngFor="let passenger of passengers"
+        [detail]="passenger">
       </passenger-detail>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index;">
