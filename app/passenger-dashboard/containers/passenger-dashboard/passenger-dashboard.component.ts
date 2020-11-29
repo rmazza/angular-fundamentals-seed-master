@@ -6,6 +6,8 @@ import { Passenger } from '../../models/passenger.interface';
   styleUrls: ['passenger-dashboard.component.scss'],
   template: `
     <div class="app">
+      <passenger-count></passenger-count>
+      <passenger-detial></passenger-detail>
       <h3>Airline Passengers</h3>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index;">
@@ -26,12 +28,12 @@ import { Passenger } from '../../models/passenger.interface';
   `
 })
 export class PassengerDashboardComponent implements OnInit {
+  passengers: Passenger[];
+
+  constructor() { }
 
   ngOnInit() {
-
-  }
-  
-    passengers: Passenger[] = [{
+    this.passengers = [{
         id: 1,
         fullname: 'Stephen',
         checkedIn: true,
@@ -53,4 +55,5 @@ export class PassengerDashboardComponent implements OnInit {
         checkedInDate: 1490742000000,
         children: null
       }]
+  }
 }
