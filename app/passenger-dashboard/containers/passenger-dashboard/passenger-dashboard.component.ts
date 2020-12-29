@@ -9,27 +9,15 @@ import { Passenger } from '../../models/passenger.interface';
       <passenger-count
         [items]="passengers">
       </passenger-count>
+      <div *ngFor="let passenger of passengers">
+        {{ passenger.fullname }}
+      </div>
       <passenger-detail
         *ngFor="let passenger of passengers"
         [detail]="passenger"
         (edit)="handleEdit($event)"
         (remove)="handleRemove($event)">
       </passenger-detail>
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index;">
-          <span class="status"
-          [class.checked-in]="passenger.checkedIn"></span>
-          {{ i }}: {{ passenger.fullname }}
-          <p>{{ passenger | json }}</p>
-          <div class="date">
-            Check in date: 
-            {{ passenger.checkedIn ? (passenger.checkedInDate | date: 'yMMMMd' | uppercase ) : 'N/A' }}
-          </div>
-          <div class="children">
-            Children: {{ passenger.children?.length || 0 }}
-          </div>
-        </li>
-      </ul>
     </div>
   `
 })
@@ -63,11 +51,18 @@ export class PassengerDashboardComponent implements OnInit {
       }]
   }
 
-  handleEdit(event) {
-    console.log(event);
+  handleEdit(event: Passenger) {
+    this.passengers = this.passengers.map( (passenger: Passenger) => {
+      if (passenger.id === event.id) {
+        passenger = Object.assign({}, passenger, event);
+      }
+      return passenger;
+    });
   }
 
-  handleRemove(event) {
-    console.log(event);
+  handleRemove(event: Passenger) {
+    this.passengers = this.passengers.filter( (passenger: Passenger) => {
+      return passenger.id !== event.id;
+    });
   }
 }

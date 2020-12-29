@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Passenger } from '../../models/passenger.interface';
 
 @Component({
@@ -17,7 +17,6 @@ import { Passenger } from '../../models/passenger.interface';
           <div *ngIf="!editing">
             {{ detail.fullname }}
           </div>
-          <!-- <p>{{ detail | json }}</p> -->
           <div class="date">
             Check in date: 
             {{ detail.checkedIn ? (detail.checkedInDate | date: 'yMMMMd' | uppercase ) : 'N/A' }}
@@ -34,7 +33,7 @@ import { Passenger } from '../../models/passenger.interface';
     </div>
     `
 })
-export class PassengerDetailComponent {
+export class PassengerDetailComponent implements OnChanges {
 
     @Input()
     detail: Passenger;
@@ -49,8 +48,14 @@ export class PassengerDetailComponent {
 
     constructor() { }
 
+    ngOnChanges(changes) {
+      if (changes.detail) {
+        this.detail = Object.assign({}, changes.detail.currentValue)
+      }
+    }
+
     onNameChange(name: string) {
-      console.log('Value: ', name);
+      this.detail.fullname = name;
     }
 
     toggleEdit() {
@@ -59,6 +64,7 @@ export class PassengerDetailComponent {
       }
       this.editing = !this.editing;
     }
+    
     onRemove() {
       this.remove.emit(this.detail);
     }
