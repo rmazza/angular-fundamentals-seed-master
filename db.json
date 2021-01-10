@@ -1,7 +1,7 @@
 {
   "passengers": [
     {
-      "id": 2,
+      "id": 1,
       "fullname": "Rose",
       "checkedIn": false,
       "checkedInDate": null,
