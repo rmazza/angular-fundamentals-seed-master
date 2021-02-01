@@ -12,16 +12,26 @@ import { Baggage } from '../../models/baggage.interface';
             <div>
                 Passenger name:
                 <input
+                    #fullname="ngModel"
                     type="text"
                     name="fullname"
+                    required
                     [ngModel]="detail?.fullname">
+                <div *ngIf="fullname.errors?.required && fullname.dirty" class="error">
+                    Passenger name is required
+                </div>
             </div>
             <div>
                 Passenger id:
                 <input
+                    #id="ngModel"
                     type="number"
                     name="id"
+                    required
                     [ngModel]="detail?.id">
+                <div *ngIf="id.errors?.required && id.touched" class="error">
+                    Passenger id is required
+                </div>
             </div>
             <div>
                 <label>
@@ -75,7 +85,7 @@ import { Baggage } from '../../models/baggage.interface';
                         {{ item.value }}
                     </option>
                 </select>
-                <select
+                <!-- <select
                     name="baggage"
                     [ngModel]="detail?.baggage">
                     <option
@@ -83,9 +93,11 @@ import { Baggage } from '../../models/baggage.interface';
                         [ngValue]="item.key">
                         {{ item.value }}
                     </option>
-                </select>
+                </select> -->
             </div>
-            {{ form.value | json }}
+            <div>{{ form.value | json }}</div>
+            <div>Valid: {{ form.valid | json }}</div>
+            <div>Invalid: {{ form.invalid | json }}</div>
         </form>
         `
 })
