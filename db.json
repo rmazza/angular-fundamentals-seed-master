@@ -5,7 +5,12 @@
       "fullname": "Rose",
       "checkedIn": false,
       "checkedInDate": null,
-      "baggage": ""
+      "baggage": [
+        {
+          "key": "none",
+          "value": "No baggage"
+        }
+      ]
     },
     {
       "id": 2,
