@@ -1,10 +1,9 @@
 {
   "passengers": [
     {
+      "fullname": "Rossasdf",
       "id": 1,
-      "fullname": "Rose",
       "checkedIn": false,
-      "checkedInDate": null,
       "baggage": [
         {
           "key": "none",
