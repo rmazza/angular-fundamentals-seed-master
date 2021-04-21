@@ -11,7 +11,7 @@ import { NotFoundComponent } from './not-found.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: '', redirectTo: 'passengers', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
   
 
@@ -27,7 +27,7 @@ const routes: Routes = [
     BrowserModule,
     CommonModule,
     FormsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { useHash: true }),
     PassengerDashboardModule
   ],
   bootstrap: [AppComponent]
